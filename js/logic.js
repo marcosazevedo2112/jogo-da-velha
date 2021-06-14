@@ -3,32 +3,37 @@ import { render } from "./render.js";
 export let logic = {
     /** 
     * @param {string} logic.player - The actual player
+    * @returns none
     */
     initGame: (player) => {
         logic.player = player;
         render.createGame();
     },
+
     /** 
     * @param {string} logic.player - The actual player
     * @param {Object} event - The click event
+    * @returns none
     */
     clickBlock: (event, player) => {
         if (!isNaN(event.target.innerText)) {
             if (player == "X") {
-                render.changeNextPlayer();
+                render.changeNextPlayer(player);
                 logic.player = "O"
-                render.makeMark(event, logic.player);
+                render.makeMark(event, player);
                 logic.checkWinner(event.target.parentNode);
             } else {
-                render.changeNextPlayer();
+                render.changeNextPlayer(player);
                 logic.player = "X"
-                render.makeMark(event, logic.player);
+                render.makeMark(event, player);
                 logic.checkWinner(event.target.parentNode);
             }
         }
     },
+
     /** 
     * @param {node} gameDiv - The div where the game is running, default = #game
+    * @returns none
     */
     checkWinner: (gameDiv) => {
         let blocks = gameDiv.children;
@@ -76,6 +81,10 @@ export let logic = {
 
         }
     },
+    
+    /**
+     * @returns none
+     */
     clearGame: () => {
         render.clearGameRender();
     }
