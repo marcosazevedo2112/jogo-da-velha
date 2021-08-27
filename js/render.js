@@ -57,12 +57,12 @@ export let render = {
     },
 
     /** 
-    * @param {string} logic.player - The actual player
+    * @param {string | undefined} gameDiv - The div where the game is running, defaultlogic.player - If the someone wins, the player who wins, if not, undefined
     * @returns none
     */
     showWinner: (player) => {
         let title = document.querySelector("#title-game");
-        if (player !== 1) {
+        if (player !== undefined) {
             setTimeout(() => {
                 title.innerText = `Parabéns player ${player}, você ganhou!!`
             }), 2500
@@ -77,8 +77,9 @@ export let render = {
     * @returns none
     */
     paintWinner: (blocks, gameDiv = document.querySelector("#game")) =>{
+        console.log("Chamado! Args: " + blocks);
         blocks.forEach(block => {
-            gameDiv.children[block].classList.toggle('win');
+            gameDiv.children[block].classList.add('win');
         });
     },
 
