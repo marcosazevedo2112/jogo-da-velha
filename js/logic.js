@@ -8,6 +8,7 @@ export let logic = {
     initGame: (player) => {
         logic.player = player;
         render.createGame();
+        render.changeNextPlayer(logic.player);
     },
 
     /** 
@@ -17,16 +18,16 @@ export let logic = {
     */
     clickBlock: (event, player) => {
         if (!isNaN(event.target.innerText)) {
-            if (player == "X") {
-                render.changeNextPlayer(player);
+            if (player === "X") {
+                render.makeMark(event, logic.player);
+                logic.checkWinner(event.target.parentNode);
                 logic.player = "O"
-                render.makeMark(event, player);
-                logic.checkWinner(event.target.parentNode);
+                render.changeNextPlayer(logic.player);
             } else {
-                render.changeNextPlayer(player);
-                logic.player = "X"
-                render.makeMark(event, player);
+                render.makeMark(event, logic.player);
                 logic.checkWinner(event.target.parentNode);
+                logic.player = "X"
+                render.changeNextPlayer(logic.player);
             }
         }
     },
