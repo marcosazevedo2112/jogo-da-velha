@@ -6,6 +6,7 @@ export let logic = {
     * @returns none
     */
     initGame: (player) => {
+        logic.canPlay = true;
         logic.player = player;
         render.createGame();
         render.changeNextPlayer(logic.player);
@@ -17,7 +18,7 @@ export let logic = {
     * @returns none
     */
     clickBlock: (event, player) => {
-        if (!isNaN(event.target.innerText)) {
+        if (!isNaN(event.target.innerText) && logic.canPlay) {
             if (player === "X") {
                 render.makeMark(event, logic.player);
                 logic.checkWinner(event.target.parentNode);
@@ -45,44 +46,44 @@ export let logic = {
             }
         }
         for (let i = 0; i < 3; i++) {
-            //Verfica as horizontais
-            if ((blocks[(3 * i)].innerText === blocks[(3 * i) + 1].innerText) && (blocks[(3 * i)].innerText) == blocks[(3 * i) + 2].innerText) {
-                render.showWinner(logic.player);
-                setTimeout(function () {
-                    logic.clearGame();
-                }, 1500);
+            //Verifica as horizontais
+            if ((blocks[(3 * i)].innerText === blocks[(3 * i) + 1].innerText) && (blocks[(3 * i)].innerText) == blocks[(3 * i) + 2].innerText && logic.canPlay) {
+                logic.win([3*i, (3*i)+1, (3*i)+2], logic.player);
             }
             //Verifica as verticais
-            if ((blocks[i].innerText === blocks[i + 3].innerText) && (blocks[i].innerText === blocks[i + 6].innerText)) {
-                render.showWinner(logic.player);
-                setTimeout(function () {
-                    logic.clearGame();
-                }, 1500);
+            else if ((blocks[i].innerText === blocks[i + 3].innerText) && (blocks[i].innerText === blocks[i + 6].innerText) && logic.canPlay) {
+                logic.win([i, i+3, i+6], logic.player)
             }
             //Verifica as diagonais 1
-            if ((blocks[0].innerText === blocks[4].innerText) && (blocks[0].innerText == blocks[8].innerText)) {
-                render.showWinner(logic.player);
-                setTimeout(function () {
-                    logic.clearGame();
-                }, 1500);
+            else if ((blocks[0].innerText === blocks[4].innerText) && (blocks[0].innerText == blocks[8].innerText) && logic.canPlay) {
+                logic.win([0, 4, 8], logic.player);
             }
             //Verifica as diagonais 2
-            if ((blocks[2].innerText === blocks[4].innerText) && (blocks[2].innerText == blocks[6].innerText)) {
-                render.showWinner(logic.player);
-                setTimeout(function () {
-                    logic.clearGame();
-                }, 1500);
+            else if ((blocks[2].innerText === blocks[4].innerText) && (blocks[2].innerText == blocks[6].innerText) && logic.canPlay) {
+                logic.win([2, 4, 6], logic.player);
             }
         }
-        if (velhaCounter == 9) {
-            render.showWinner(1);
-            setTimeout(function () {
-                logic.clearGame();
-            }, 1500);
-
+        if (velhaCounter == 9 && logic.canPlay) {
+            logic.win([0, 1, 2, 3, 4, 5, 6, 7, 8], undefined)
         }
     },
     
+    /**
+    * @param {array} blocks - The id of blocks to paint in a winning case
+    * @param {string | undefined} gameDiv - The div where the game is running, defaultlogic.player - If the someone wins, the player who wins, if not, undefined
+    * @param {node} gameDiv - The div where the game is running, default = #game
+    * @returns none
+    */
+    win: (blocks, player)=>{
+        logic.canPlay = false;
+        render.paintWinner(blocks);
+        render.showWinner(player);
+        setTimeout(function () {
+            logic.clearGame();
+            logic.canPlay = true;
+        }, 1500);
+    },
+
     /**
      * @returns none
      */
