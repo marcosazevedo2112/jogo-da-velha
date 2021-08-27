@@ -47,6 +47,7 @@ export let logic = {
         for (let i = 0; i < 3; i++) {
             //Verfica as horizontais
             if ((blocks[(3 * i)].innerText === blocks[(3 * i) + 1].innerText) && (blocks[(3 * i)].innerText) == blocks[(3 * i) + 2].innerText) {
+                render.paintWinner([3*i, (3*i)+1, (3*i)+2]);
                 render.showWinner(logic.player);
                 setTimeout(function () {
                     logic.clearGame();
@@ -54,6 +55,7 @@ export let logic = {
             }
             //Verifica as verticais
             if ((blocks[i].innerText === blocks[i + 3].innerText) && (blocks[i].innerText === blocks[i + 6].innerText)) {
+                render.paintWinner([i, i+3, i+6]);
                 render.showWinner(logic.player);
                 setTimeout(function () {
                     logic.clearGame();
@@ -61,6 +63,7 @@ export let logic = {
             }
             //Verifica as diagonais 1
             if ((blocks[0].innerText === blocks[4].innerText) && (blocks[0].innerText == blocks[8].innerText)) {
+                render.paintWinner([0, 4, 8]);
                 render.showWinner(logic.player);
                 setTimeout(function () {
                     logic.clearGame();
@@ -68,6 +71,7 @@ export let logic = {
             }
             //Verifica as diagonais 2
             if ((blocks[2].innerText === blocks[4].innerText) && (blocks[2].innerText == blocks[6].innerText)) {
+                render.paintWinner([2, 4, 6]);
                 render.showWinner(logic.player);
                 setTimeout(function () {
                     logic.clearGame();
@@ -75,6 +79,7 @@ export let logic = {
             }
         }
         if (velhaCounter == 9) {
+            render.paintWinner([0, 1, 2, 3, 4, 5, 6, 7, 8]);
             render.showWinner(1);
             setTimeout(function () {
                 logic.clearGame();

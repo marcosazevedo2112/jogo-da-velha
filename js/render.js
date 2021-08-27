@@ -65,11 +65,21 @@ export let render = {
         if (player !== 1) {
             setTimeout(() => {
                 title.innerText = `Parabéns player ${player}, você ganhou!!`
-            }), 1500
+            }), 2500
         }else{
             title.innerText = "Vish! deu velha.";
         }
         return null;
+    },
+    /** 
+    * @param {array} blocks - The id of blocks to paint in a winning case
+    * @param {node} gameDiv - The div where the game is running, default = #game
+    * @returns none
+    */
+    paintWinner: (blocks, gameDiv = document.querySelector("#game")) =>{
+        blocks.forEach(block => {
+            gameDiv.children[block].classList.toggle('win');
+        });
     },
 
     /** 

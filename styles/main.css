@@ -27,7 +27,7 @@ body{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    gap: 2px;
+    gap: 3px;
 
 }
 
@@ -56,11 +56,26 @@ body{
     background-color: #FBE7C6;
 }
 
+.win:hover{
+    font-size: 8rem;
+}
 
 .hidden{
     color: rgba(0, 0, 0, 0.0);
+    -webkit-touch-callout: none;  /* iPhone OS, Safari */
+    -webkit-user-select: none;    /* Chrome, Safari 3 */
+    -khtml-user-select: none;     /* Safari 2 */
+    -moz-user-select: none;       /* Firefox */
+    -ms-user-select: none;        /* IE10+ */
+    user-select: none;            /* Possível implementação no futuro */
 }
 
 .hidden:hover{
     color: rgba(0, 0, 0, 0.0); 
+}
+
+.win{
+    color: #FFAEBC;
+    background-color: white;
+    font-size: 6rem;
 }
