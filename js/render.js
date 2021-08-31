@@ -6,11 +6,6 @@ export let render = {
     * @returns none
     */
     createGame: (gameDiv = document.querySelector("#game")) => {
-        if (gameDiv == null) {
-            console.error("Erro ao tentar encontrar a div com id #game");
-            return -1;
-        }
-
         for (let elementID = 0; elementID < 9; elementID++) {
             gameDiv.appendChild(render.makeBlock(elementID));
         }
@@ -77,7 +72,6 @@ export let render = {
     * @returns none
     */
     paintWinner: (blocks, gameDiv = document.querySelector("#game")) =>{
-        console.log("Chamado! Args: " + blocks);
         blocks.forEach(block => {
             gameDiv.children[block].classList.add('win');
         });

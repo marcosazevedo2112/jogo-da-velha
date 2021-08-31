@@ -2,7 +2,7 @@ import { render } from "./render.js";
 
 export let logic = {
     /** 
-    * @param {string} logic.player - The actual player
+    * @param {string} logic.player - The actual player, can be 'X' or 'O'
     * @returns none
     */
     initGame: (player) => {
@@ -91,5 +91,3 @@ export let logic = {
         render.clearGameRender();
     }
 }
-
-logic.initGame("X");
