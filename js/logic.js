@@ -70,8 +70,7 @@ export let logic = {
     
     /**
     * @param {array} blocks - The id of blocks to paint in a winning case
-    * @param {string | undefined} gameDiv - The div where the game is running, defaultlogic.player - If the someone wins, the player who wins, if not, undefined
-    * @param {node} gameDiv - The div where the game is running, default = #game
+    * @param {string | undefined} logic.player - If the someone wins, the player who wins, if not, undefined
     * @returns none
     */
     win: (blocks, player)=>{
